@@ -10,7 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class Admin extends Authenticatable
+class Doctor extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
@@ -18,7 +18,7 @@ class Admin extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    protected $guard =  'admin' ;
+    protected $guard =  'doctor' ;
     /**
      * The attributes that are mass assignable.
      *
@@ -59,5 +59,5 @@ class Admin extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-    
+   
 }

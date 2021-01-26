@@ -8,17 +8,25 @@
 
                 <!-- main home - dashboard tab -->
                 <li class="nav-item @yield('s_home')">
-                    <a href="{{ route('admin.home') }}">
+                    <a href="{{ route('doctor.home') }}">
                         <i class="fas fa-home"></i>
                         <p>Home</p>                        
                     </a>                    
                 </li>
                                 
-                <!-- doctors tab -->
-                <li class="nav-item @yield('s_doctors')">
+                <!-- clinics tab -->
+                <li class="nav-item @yield('s_clinics')">
                     <a href="#">
-                        <i class="fas fa-user-md"></i>
-                        <p>Doctors</p>
+                        <i class="fas fa-clinic-medical"></i>
+                        <p>My Clinics</p>
+                    </a>
+                </li>
+                                
+                <!-- reservations tab -->
+                <li class="nav-item @yield('s_reservations')">
+                    <a href="#">
+                        <i class="fas fa-check-square"></i>
+                        <p>Reservations</p>
                     </a>
                 </li>
 
