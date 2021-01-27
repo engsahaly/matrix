@@ -94,7 +94,7 @@
 
 <!-- ######################################################################### -->
 <!-- ######################################################################### -->
-<!-- THIS IS FOR ADD clinic MODAL -->      
+<!-- THIS IS FOR ADD CLINIC MODAL -->      
 <div class="modal fade" id="doctor_clinic_add_modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -149,15 +149,15 @@
     </div>
   </div>
 </div>
-<!-- THIS IS FOR ADD clinic MODAL -->  
+<!-- THIS IS FOR ADD CLINIC MODAL -->  
 
-<!-- THIS IS FOR DELETE clinic MODAL -->      
+<!-- THIS IS FOR DELETE CLINIC MODAL -->      
 <div class="modal fade" id="doctor_clinic_delete_modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
 
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="doctor_clinic_delete_modal_header">Delete clinic</h5>
+                <h5 class="modal-title" id="doctor_clinic_delete_modal_header">Delete Clinic</h5>
             </div>
 
             <div id="doctor_clinic_delete_alert_div"></div>
@@ -174,9 +174,9 @@
       </div>
   </div>
 </div>
-<!-- THIS IS FOR DELETE clinic MODAL -->  
+<!-- THIS IS FOR DELETE CLINIC MODAL -->  
 
-<!-- THIS IS FOR EDIT clinic MODAL -->      
+<!-- THIS IS FOR EDIT CLINIC MODAL -->      
 <div class="modal fade" id="doctor_clinic_edit_modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -231,7 +231,7 @@
     </div>
   </div>
 </div>
-<!-- THIS IS FOR EDIT clinic MODAL -->  
+<!-- THIS IS FOR EDIT CLINIC MODAL -->  
 
 
 
@@ -324,7 +324,7 @@ $("document").ready(function(){
 
     //SCRIPT FOR ACCESS DELETE CLINIC IN MODAL
     $(document).on('click', ".doctor_clinic_delete_class", function () {    
-        // get attribute value of name (project id)
+        // get attribute value of name (clinic id)
         var currentHrefForDelete = $(this).attr("href");
         var currentIdForDelete = $(this).attr("data-id");
         $("#doctor_clinic_delete_btn").attr("href" , currentHrefForDelete );
@@ -380,7 +380,7 @@ $("document").ready(function(){
     // SCRIPT FOR SHOWING EDITING CLINIC MODAL  
     $(document).on('click', ".doctor_clinic_edit_class", function (e) {
       e.preventDefault();
-      var currentExperienceID = $(this).attr("data-id");            
+      var currentClinicID = $(this).attr("data-id");
       
       $.ajax({
           url: "{{ route('doctor.clinic.showEditForm') }}",
@@ -388,45 +388,21 @@ $("document").ready(function(){
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
-          data: { id : currentExperienceID } ,
+          data: { id : currentClinicID } ,
           dataType: "json",
           success: function(data){             
               $('#doctor_clinic_edit_modal').modal('show').scrollTop(-1);
-              $("#doctor_clinic_edit_name").val(data['name']) ;
-              $("#doctor_clinic_edit_degree").val(data['degree']) ;
-              $("#doctor_clinic_edit_start").val(data['start']) ;
-              $("#doctor_clinic_edit_description").val(data['description']) ;              
-              if (data['ordering'] < 999) {
-                $("#doctor_clinic_edit_ordering").val(data['ordering']) ;
-              } else {
-                $("#doctor_clinic_edit_ordering").val('') ;
-              }
-              $("#doctor_clinic_edit_id").val(data['id']) ;
-
-              if (data['end'] === null) {
-                $('#doctor_clinic_edit_checkbox_current').prop('checked', true) ;              
-                $("#doctor_clinic_edit_end").prop('disabled', true);
-                $('#doctor_clinic_edit_end').val('');
-              } else {
-                $('#doctor_clinic_edit_checkbox_current').prop('checked', false) ;
-                $("#doctor_clinic_edit_end").prop('disabled', false);
-                $("#doctor_clinic_edit_end").val(data['end']) ;
-              }
+              $("#doctor_clinic_edit_fees").val(data['fees']) ;
+              $("#doctor_clinic_edit_speciality").val(data['speciality']) ;
+              $("#doctor_clinic_edit_location").val(data['location']) ;
+              $("#doctor_clinic_edit_description").val(data['description']) ;                            
+              $("#doctor_clinic_edit_id").val(data['id']) ;              
           },
           error: function(){
               alert("failed .. Please try again !");
           }
       }) ;
 
-    }) ;
-
-    //SCRIPT FOR DISABLE INPUT END DATE WHEN CHECK CURRENT CHECKBOX (EDIT CLINIC)
-    $(document).on('change', "#doctor_clinic_edit_checkbox_current", function () {
-      if(this.checked) {        
-        $("#doctor_clinic_edit_end").prop('disabled', true);
-      } else {
-        $("#doctor_clinic_edit_end").prop('disabled', false);
-      }
     }) ;
 
     // AJAX REQUEST FOR EDITING CLINIC
@@ -454,7 +430,7 @@ $("document").ready(function(){
         }
       });
 
-      if (empty == 5) {
+      if (empty == 4) {
         $("#doctor_clinic_edit_alert_div").empty() ;
         $("#doctor_clinic_edit_alert_div").removeClass() ;
         $("#doctor_clinic_edit_alert_div").addClass('m-2 alert alert-danger') ;
