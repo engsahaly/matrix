@@ -16,9 +16,9 @@
                                 
                 <!-- doctors tab -->
                 <li class="nav-item @yield('s_doctors')">
-                    <a href="#">
+                    <a href="{{ route('admin.clinics') }}">
                         <i class="fas fa-user-md"></i>
-                        <p>Doctors</p>
+                        <p>Clinics</p>
                     </a>
                 </li>
 

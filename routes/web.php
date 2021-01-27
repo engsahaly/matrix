@@ -109,15 +109,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', 'AdminLoginController@adminLogout')->name('admin.logout');
     
 
-    ##------------------------------------------------------- FORGET PASSWORD SECTION
-    Route::get('/forgot-password', 'AdminPasswordResetLinkController@create')->name('admin.password.request');
-    Route::post('/forgot-password', 'AdminPasswordResetLinkController@store')->name('admin.password.email');
-    Route::get('/reset-password/{token}', 'AdminNewPasswordController@create')->name('admin.password.reset');
-    Route::post('/reset-password', 'AdminNewPasswordController@store')->name('admin.password.update');
-    
-    
-    ##------------------------------------------------------- ADMIN PROFILE SECTION
-    Route::match(['get', 'post'], "/myprofile", ['uses'=>'AdminController@edit', 'as'=>'admin.profile']);
-    Route::post("/myprofile/password", ['uses'=>'AdminController@updatePassword', 'as'=>'admin.change.password']);    
+    ##------------------------------------------------------- CLINICS SECTION FOR APPROVAL
+    Route::get('/clinics', 'ClinicController@clinicsForAdmin')->name('admin.clinics');
+    Route::post('/clinic/approve', 'ClinicController@approve')->name('admin.clinic.approve');
+    Route::post('/clinic/decline', 'ClinicController@decline')->name('admin.clinic.decline');
 
 }) ;

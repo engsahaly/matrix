@@ -13,7 +13,7 @@ class ClinicController extends Controller
         $clinics = Clinic::orderby('id', 'desc')->with(['doctor'])->get() ;
         return $clinics ;
     }
-
+    
     public function index() {        
         $clinics = Clinic::orderby('id', 'desc')->get() ;
         return view("default.doctor.doctorClinics", compact(['clinics']) );
@@ -122,6 +122,38 @@ class ClinicController extends Controller
             } else {
                 return response()->json(['doctor_clinic_edit_errors_single'=>'There is something wrong .. Please try again later!']);
             }
+        }
+    }
+
+
+
+    // clinics for admins to approve or not
+    public function clinicsForAdmin() {
+        $clinics = Clinic::orderby('id', 'desc')->get() ;
+        return view("default.admin.adminClinics", compact(['clinics']) );
+    }
+
+    public function approve(Request $request) {
+        $clinic = Clinic::find($request->input('id')) ;        
+        $clinic->status = '1' ;
+        $success = $clinic->save() ;
+
+        if ($success) {
+            return response()->json(['admin_clinic_approve_success'=>'Updated Successfully']);
+        } else {
+            return response()->json(['admin_clinic_approve_error'=>'There is something wrong .. Please try again later!']);
+        }
+    }
+
+    public function decline(Request $request) {
+        $clinic = Clinic::find($request->input('id')) ;
+        $clinic->status = '0' ;
+        $success = $clinic->save() ;
+
+        if ($success) {
+            return response()->json(['admin_clinic_decline_success'=>'Updated Successfully']);
+        } else {
+            return response()->json(['admin_clinic_decline_error'=>'There is something wrong .. Please try again later!']);
         }
     }
 
