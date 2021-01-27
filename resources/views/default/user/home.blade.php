@@ -1,6 +1,6 @@
 @extends('default.master')
 
-@section('seoTitle','Matrix doctors')
+@section('seoTitle','Matrix doctors | Home')
 @section('s_home','active')
 
 @section('mainContents')

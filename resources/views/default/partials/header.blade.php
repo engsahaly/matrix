@@ -3,7 +3,7 @@
     <div class="logo-header" data-background-color="dark2">
         
         <!-- Dashboard Logo -->
-        <a href="{{ route('front.home') }}">
+        <a href="{{ route('user.home') }}">
             <h4 class="text-white text-uppercase">Matrix Doctors</h4>
         </a>      
         
@@ -39,11 +39,11 @@
                             </li>
                                 <div class="dropdown-divider"></div>
                             <li>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
                             </li>
                         @else
                             <li>
-                                <a href="#" class="dropdown-item">Login / Register</a>
+                                <a href="{{ route('user.login') }}" class="dropdown-item">Login / Register</a>
                             </li>   
                         @endif
                     </ul>

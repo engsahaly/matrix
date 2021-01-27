@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/')->group(function () {
 
     ##------------------------------------------------------- MAIN HOME ADMIN DASHBOARD PAGE
-    Route::get('/', function () { return view('default.front.home'); })->name('front.home');
+    Route::get('/', function () { return view('default.user.home'); })->name('user.home');
 
 
+    ##------------------------------------------------------- LOGGING & LOGOUT SECTION
+    Route::get('/login', 'UserLoginController@showLoginForm')->name('user.login');
+    Route::post('/login', 'UserLoginController@login')->name('user.login.submit');
+    Route::get('/logout', 'UserLoginController@userLogout')->name('user.logout');
 
 }) ;
 
