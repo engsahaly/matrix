@@ -60,4 +60,11 @@ class Doctor extends Authenticatable
         'profile_photo_url',
     ];
    
+
+    ##--------------------------------- RELATIONSHIPS    
+    public function clinics() {
+        return $this->hasMany("\App\Models\Clinic", 'doctor_id', 'id');
+    }
+
+
 }

@@ -61,7 +61,16 @@ Route::prefix('doctor')->group(function () {
     Route::get('/login', 'DoctorLoginController@showLoginForm')->name('doctor.login');
     Route::post('/login', 'DoctorLoginController@login')->name('doctor.login.submit');
     Route::get('/logout', 'DoctorLoginController@doctorLogout')->name('doctor.logout');
+    
+    
+    ##------------------------------------------------------- MY CLININCS SECTION
+    Route::get('/clinics', 'ClinicController@index')->name('doctor.clinics');
+    Route::post('/clinic/add', 'ClinicController@store')->name('doctor.clinic.add');
+    Route::post('/clinic/delete', 'ClinicController@delete')->name('doctor.clinic.delete');
+    Route::get('/clinic/edit', 'ClinicController@showEditForm')->name('doctor.clinic.showEditForm');
+    Route::post('/clinic/edit', 'ClinicController@update')->name('doctor.clinic.update');
 
+    
 }) ;
 
 
