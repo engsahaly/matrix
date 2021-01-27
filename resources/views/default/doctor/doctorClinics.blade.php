@@ -26,14 +26,14 @@
             </div>
             
             <!-- main page Content -->
-            <div class="row" id="mainCont">
+            <div class="row" id="mainCont"> 
                 @if (count($clinics) > 0)
                 <!-- Experience card -->
                 <div class="col-md-12" >                                                                    
 
                     <table class="display table table-striped table-hover" id="basic-datatables">
                         <thead>
-                            <tr>', '', '', 'doctor_id',
+                            <tr>
                                 <th style="width: 10px">#</th>
                                 <th>fees</th>
                                 <th>speciality</th>
@@ -62,6 +62,7 @@
                               </span>
                             @endif
                             </td>                           
+                            <td>                           
                             <div class="btn-group">
                                 <a href="#" data-id="{{ $clinic->id }}" class="btn btn-primary btn-sm doctor_clinic_edit_class"><i class="fas fa-edit"></i></a>
                                 <a href="{{ route('doctor.clinic.delete') }}" class="btn btn-danger btn-sm doctor_clinic_delete_class" data-id="{{ $clinic->id }}" data-toggle="modal" data-target="#doctor_clinic_delete_modal"><i class="fas fa-trash-alt"></i></a>
@@ -99,7 +100,7 @@
     <div class="modal-content">
 
       <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="doctor_clinic_add_modal_header">Add clinic</h5>        
+        <h5 class="modal-title" id="doctor_clinic_add_modal_header">Add Clinic</h5>        
       </div>
 
       <div class="modal-body">
@@ -111,42 +112,30 @@
             <div class="card-body">
                 <div class="row">
 
-                <div class="col-6 form-group">
-                    <label for="doctor_clinic_add_name">Organization</label>
+                <div class="col-4 form-group">
+                    <label for="doctor_clinic_add_fees">Fees</label>
                     <span class="text-danger">*</span>
-                    <input type="text" class="form-control" id="doctor_clinic_add_name" name="doctor_clinic_add_name" placeholder="Organization">
+                    <input type="number" class="form-control" id="doctor_clinic_add_fees" name="doctor_clinic_add_fees" min="1" placeholder="Fees">
                 </div>
 
-                <div class="col-6 form-group">
-                    <label for="doctor_clinic_add_degree">Degree</label>
+                <div class="col-4 form-group">
+                    <label for="doctor_clinic_add_speciality">Speciality</label>
                     <span class="text-danger">*</span>
-                    <input type="text" class="form-control" id="doctor_clinic_add_degree" name="doctor_clinic_add_degree" placeholder="Degree">
+                    <input type="text" class="form-control" id="doctor_clinic_add_speciality" name="doctor_clinic_add_speciality" placeholder="Speciality">
                 </div>
 
-                <div class="col-5 form-group">
-                    <label for="doctor_clinic_add_start">Start Date</label>
+                <div class="col-4 form-group">
+                    <label for="doctor_clinic_add_location">Location</label>
                     <span class="text-danger">*</span>
-                    <input type="month" class="form-control" id="doctor_clinic_add_start" name="doctor_clinic_add_start">
-                </div>
-
-                <div class="col-5 form-group">
-                    <label for="doctor_clinic_add_end">End Date</label>
-                    <!-- <span class="text-danger">*</span> -->
-                    <input type="month" class="form-control" id="doctor_clinic_add_end" name="doctor_clinic_add_end">
-                    <input type="checkbox" class="mr-1" id="doctor_clinic_add_checkbox_current" name="doctor_clinic_add_checkbox_current">
-                    <label class="form-check-label" for="doctor_clinic_add_checkbox_current">Current</label>
-                </div>
-
-                <div class="col-2 form-group">
-                    <label for="doctor_clinic_add_ordering">Order</label>
-                    <!-- <span class="text-danger">*</span> -->
-                    <input type="number" class="form-control" id="doctor_clinic_add_ordering" name="doctor_clinic_add_ordering" min="1" placeholder="Order">
+                    <input type="text" class="form-control" id="doctor_clinic_add_location" name="doctor_clinic_add_location" placeholder="Location">
                 </div>
 
                 <div class="col-12 form-group">
                     <label for="doctor_clinic_add_description">Description</label>                                            
                     <textarea name="doctor_clinic_add_description" id="doctor_clinic_add_description" class="w-100 p-2" rows="1" style="border:1px solid #D3D3D3; border-radius:7px;" placeholder="Description"></textarea>
                 </div>
+
+                <input type="hidden" name="doctor_clinic_add_doctor_id" id="doctor_clinic_add_doctor_id" value="{{ Auth::guard('doctor')->id() }}">
 
                 </div>
             </div>
@@ -205,47 +194,33 @@
             <div class="card-body">
                 <div class="row">
 
-                <div class="col-6 form-group">
-                    <label for="doctor_clinic_edit_name">Organization</label>
+                <div class="col-4 form-group">
+                    <label for="doctor_clinic_edit_fees">Fees</label>
                     <span class="text-danger">*</span>
-                    <input type="text" class="form-control" id="doctor_clinic_edit_name" name="doctor_clinic_edit_name" placeholder="Organization">
+                    <input type="number" class="form-control" id="doctor_clinic_edit_fees" name="doctor_clinic_edit_fees" min="1" placeholder="Fees">
                 </div>
 
-                <div class="col-6 form-group">
-                    <label for="doctor_clinic_edit_degree">Degreee</label>
+                <div class="col-4 form-group">
+                    <label for="doctor_clinic_edit_speciality">Speciality</label>
                     <span class="text-danger">*</span>
-                    <input type="text" class="form-control" id="doctor_clinic_edit_degree" name="doctor_clinic_edit_degree" placeholder="Degree">
+                    <input type="text" class="form-control" id="doctor_clinic_edit_speciality" name="doctor_clinic_edit_speciality" placeholder="Speciality">
                 </div>
 
-                <div class="col-5 form-group">
-                    <label for="doctor_clinic_edit_start">Start Date</label>
+                <div class="col-4 form-group">
+                    <label for="doctor_clinic_edit_location">Location</label>
                     <span class="text-danger">*</span>
-                    <input type="month" class="form-control" id="doctor_clinic_edit_start" name="doctor_clinic_edit_start">
-                </div>
-
-                <div class="col-5 form-group">
-                    <label for="doctor_clinic_edit_end">End Date</label>
-                    <span class="text-danger">*</span>
-                    <input type="month" class="form-control" id="doctor_clinic_edit_end" name="doctor_clinic_edit_end">
-                    <input type="checkbox" class="mr-1" id="doctor_clinic_edit_checkbox_current" name="doctor_clinic_edit_checkbox_current">
-                    <label class="form-check-label" for="doctor_clinic_edit_checkbox_current">Current</label>
-                </div>
-
-                <div class="col-2 form-group">
-                    <label for="doctor_clinic_edit_ordering">Order</label>
-                    <!-- <span class="text-danger">*</span> -->
-                    <input type="number" class="form-control" id="doctor_clinic_edit_ordering" name="doctor_clinic_edit_ordering" min="1">
+                    <input type="text" class="form-control" id="doctor_clinic_edit_location" name="doctor_clinic_edit_location" placeholder="Location">
                 </div>
 
                 <div class="col-12 form-group">
                     <label for="doctor_clinic_edit_description">Description</label>                                            
-                    <textarea name="doctor_clinic_edit_description" id="doctor_clinic_edit_description" class="w-100 p-2" rows="1" style="border:1px solid #D3D3D3; border-radius:7px;" placeholder="description"></textarea>
+                    <textarea name="doctor_clinic_edit_description" id="doctor_clinic_edit_description" class="w-100 p-2" rows="1" style="border:1px solid #D3D3D3; border-radius:7px;" placeholder="Description"></textarea>
                 </div>
 
                 <input type="hidden" name="doctor_clinic_edit_id" id="doctor_clinic_edit_id" value="">
 
                 </div>
-            </div>
+            </div>         
                             
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="doctor_clinic_edit_close_btn" data-dismiss="modal" style="margin-left:10px">Close</button>
@@ -268,23 +243,14 @@
 <script>
 $("document").ready(function(){    
     
-    //SCRIPT FOR RESET ALL FIELD VALUES WHEN DISMISS MODAL (ADD clinic)    
+    //SCRIPT FOR RESET ALL FIELD VALUES WHEN DISMISS MODAL (ADD CLINIC)
     $('#doctor_clinic_add_modal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
         $("#doctor_clinic_add_alert_div").empty() ;
         $("#doctor_clinic_add_alert_div").removeClass() ;
     })
 
-    //SCRIPT FOR DISABLE INPUT END DATE WHEN CHECK CURRENT CHECKBOX (ADD clinic)
-    $(document).on('change', "#doctor_clinic_add_checkbox_current", function () {
-      if(this.checked) {        
-        $("#doctor_clinic_add_end").prop('disabled', true);        
-      } else {
-        $("#doctor_clinic_add_end").prop('disabled', false);
-      }
-    }) ;
-
-    // AJAX REQUEST FOR ADDING NEW clinic
+    // AJAX REQUEST FOR ADDING NEW CLINIC
     $(document).on('click', "#doctor_clinic_add_save_btn", function () {
       var empty = 0;  
       // get form and its dependences 
@@ -292,9 +258,6 @@ $("document").ready(function(){
       var formAction = theForm[0].action;      
       var formMethod = theForm[0].method;   
       var formData = theForm.serialize();         
-        //   console.log(formData);
-        //   console.log(formAction);
-        //   console.log(formMethod);
       
       //check if all inputs are empty
       $(theForm).find('input').each(function(index, elem){
@@ -309,7 +272,7 @@ $("document").ready(function(){
         }
       });
 
-      if (empty == 5) {
+      if (empty == 4) {
         $("#doctor_clinic_add_alert_div").empty() ;
         $("#doctor_clinic_add_alert_div").removeClass() ;
         $("#doctor_clinic_add_alert_div").addClass('m-2 alert alert-danger text-danger') ;
@@ -359,7 +322,7 @@ $("document").ready(function(){
 
     }) ;
 
-    //SCRIPT FOR ACCESS DELETE clinic IN MODAL
+    //SCRIPT FOR ACCESS DELETE CLINIC IN MODAL
     $(document).on('click', ".doctor_clinic_delete_class", function () {    
         // get attribute value of name (project id)
         var currentHrefForDelete = $(this).attr("href");
@@ -370,7 +333,7 @@ $("document").ready(function(){
         $("#doctor_clinic_delete_alert_div").removeClass() ;
     }) ;
 
-    // AJAX REQUEST FOR DELETING clinic
+    // AJAX REQUEST FOR DELETING CLINIC
     $(document).on('click', "#doctor_clinic_delete_btn", function (e) {  
       e.preventDefault();
 
@@ -414,7 +377,7 @@ $("document").ready(function(){
 
     }) ;
 
-    // SCRIPT FOR SHOWING EDITING clinic MODAL  
+    // SCRIPT FOR SHOWING EDITING CLINIC MODAL  
     $(document).on('click', ".doctor_clinic_edit_class", function (e) {
       e.preventDefault();
       var currentExperienceID = $(this).attr("data-id");            
@@ -457,7 +420,7 @@ $("document").ready(function(){
 
     }) ;
 
-    //SCRIPT FOR DISABLE INPUT END DATE WHEN CHECK CURRENT CHECKBOX (EDIT clinic)
+    //SCRIPT FOR DISABLE INPUT END DATE WHEN CHECK CURRENT CHECKBOX (EDIT CLINIC)
     $(document).on('change', "#doctor_clinic_edit_checkbox_current", function () {
       if(this.checked) {        
         $("#doctor_clinic_edit_end").prop('disabled', true);
@@ -466,7 +429,7 @@ $("document").ready(function(){
       }
     }) ;
 
-    // AJAX REQUEST FOR EDITING clinic
+    // AJAX REQUEST FOR EDITING CLINIC
     $(document).on('click', "#doctor_clinic_edit_save_btn", function () {
       var empty = 0;
       // get form and its dependences 
@@ -539,7 +502,7 @@ $("document").ready(function(){
 
     }) ;
 
-    //SCRIPT FOR RESET ALERT FIELD WHEN DISMISS MODAL (EDIT clinic)    
+    //SCRIPT FOR RESET ALERT FIELD WHEN DISMISS MODAL (EDIT CLINIC)    
     $('#doctor_clinic_edit_modal').on('hidden.bs.modal', function () {        
         $("#doctor_clinic_edit_alert_div").empty() ;
         $("#doctor_clinic_edit_alert_div").removeClass() ;

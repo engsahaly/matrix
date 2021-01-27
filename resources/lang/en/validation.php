@@ -147,6 +147,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'doctor_clinic_add_fees' => 'fees' ,
+        'doctor_clinic_add_speciality' => 'speciality' ,
+        'doctor_clinic_add_location' => 'location' ,
+        'doctor_clinic_add_description' => 'description' ,
+    ],
 
 ];
