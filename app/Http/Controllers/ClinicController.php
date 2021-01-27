@@ -19,5 +19,6 @@ class ClinicController extends Controller
         return view("default.doctor.doctorClinics", compact(['clinics']) );
     }
 
+    
 
 }

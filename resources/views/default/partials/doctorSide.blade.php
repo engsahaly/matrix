@@ -16,7 +16,7 @@
                                 
                 <!-- clinics tab -->
                 <li class="nav-item @yield('s_clinics')">
-                    <a href="#">
+                    <a href="{{ route('doctor.clinics') }}">
                         <i class="fas fa-clinic-medical"></i>
                         <p>My Clinics</p>
                     </a>

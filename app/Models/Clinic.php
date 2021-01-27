@@ -10,7 +10,7 @@ class Clinic extends Model
     use HasFactory;
 
     protected $table      = 'clinics';
-    protected $fillable   = ['fees', 'speciality', 'location', 'description', 'doctor_id', 'created_at', 'updated_at'];
+    protected $fillable   = ['fees', 'speciality', 'location', 'description', 'status', 'doctor_id', 'created_at', 'updated_at'];
     public $timestamps    = true;
 
     ##--------------------------------- RELATIONSHIPS
