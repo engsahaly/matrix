@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DoctorController extends Controller
 {
     /**
-     * Get all doctors
+     * Get all doctors - API
      */
     public function index() {
         $doctors = Doctor::all() ;

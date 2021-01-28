@@ -125,3 +125,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/clinic/decline', 'ClinicController@decline')->name('admin.clinic.decline');
 
 }) ;
+
+
+Route::any('{query}', 
+function() { return redirect('/'); })
+->where('query', '.*');

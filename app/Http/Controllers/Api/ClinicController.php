@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ClinicController extends Controller
 {
     /**
-     * Get all clinics with doctor
+     * Get all clinics with doctor - API
      */
     public function index() {
         $clinics = Clinic::with('doctor')->get() ;

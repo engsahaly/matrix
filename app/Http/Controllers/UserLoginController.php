@@ -13,10 +13,17 @@ class UserLoginController extends Controller
         $this->middleware('guest', ['except' => ['userLogout']]) ;
     }
 
+    /**
+     * Show user login form
+     */
     public function showLoginForm() {
         return view("default.userAuth.userLogin") ;
     }
 
+
+    /**
+     * User login
+     */
     public function login(Request $request) {
         // validate form data 
         $this->validate($request, [
@@ -34,6 +41,10 @@ class UserLoginController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'))->with('userLoginMSG', 'These credentials do not match our records');
     }
 
+
+    /**
+     * User logout
+     */
     public function userLogout() {
         Auth::guard()->logout();
         return view("default.user.home") ;

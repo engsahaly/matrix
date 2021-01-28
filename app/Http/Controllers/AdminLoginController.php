@@ -13,10 +13,17 @@ class AdminLoginController extends Controller
         $this->middleware('guest:admin', ['except' => ['adminLogout']]) ;
     }
 
+    /**
+     * Show admin login form
+     */
     public function showLoginForm() {
         return view("default.adminAuth.adminLogin") ;
     }
 
+
+    /**
+     * Admin login
+     */
     public function login(Request $request) {
         // validate form data 
         $this->validate($request, [
@@ -34,13 +41,14 @@ class AdminLoginController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'))->with('adminLoginMSG', 'These credentials do not match our records');
     }
 
+    
+    /**
+     * Admin logout
+     */
     public function adminLogout() {
         Auth::guard('admin')->logout();
         return view("default.adminAuth.adminLogin") ;
     }
-
-    public function showForgetPasswordForm() {        
-        return view("default.adminAuth.adminForget") ;
-    }
+   
 
 }

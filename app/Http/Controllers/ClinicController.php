@@ -11,16 +11,25 @@ use Illuminate\Support\Facades\Validator;
 class ClinicController extends Controller
 {
     // frontend
+    /**
+     * Get all clinics
+     */
     public static function allClinics() {
         $clinics = Clinic::where('status', '1')->orderby('id', 'desc')->with(['doctor', 'reservations'])->get() ;
         return $clinics ;
     }
     
+    /**
+     * get all doctor's clinic
+     */
     public function index() {
         $clinics = Clinic::orderby('id', 'desc')->get() ;
         return view("default.doctor.doctorClinics", compact(['clinics']) );
     }
 
+    /**
+     * Store new clinic
+     */
     public function store(Request $request) {
         // get all data
         $doctor_clinic_add_fees         = $request->input('doctor_clinic_add_fees');
@@ -67,6 +76,10 @@ class ClinicController extends Controller
         }
     }
 
+
+    /**
+     * Delete clinic
+     */
     public function delete(Request $request) {
         $clinic = Clinic::find($request->input('id')) ;            
         $success = $clinic->delete() ;
@@ -78,11 +91,17 @@ class ClinicController extends Controller
         }
     }
 
+    /**
+     * Start edit clinic information
+     */
     public function showEditForm(Request $request) {         
         $clinic = Clinic::find($request->input('id')) ;
         return response()->json($clinic);
     }
 
+    /**
+     * Edit clinic information
+     */
     public function update(Request $request) {
         // get all data
         $doctor_clinic_edit_fees         = $request->input('doctor_clinic_edit_fees');
@@ -130,11 +149,17 @@ class ClinicController extends Controller
 
 
     // clinics for admins to approve or not
+    /**
+     * Get all clinics for admin to approve
+     */
     public function clinicsForAdmin() {
         $clinics = Clinic::orderby('id', 'desc')->get() ;
         return view("default.admin.adminClinics", compact(['clinics']) );
     }
 
+    /**
+     * Approve clinic
+     */
     public function approve(Request $request) {
         $clinic = Clinic::find($request->input('id')) ;        
         $clinic->status = '1' ;
@@ -147,6 +172,9 @@ class ClinicController extends Controller
         }
     }
 
+    /**
+     * Decline clinic
+     */
     public function decline(Request $request) {
         $clinic = Clinic::find($request->input('id')) ;
         $clinic->status = '0' ;
@@ -161,6 +189,9 @@ class ClinicController extends Controller
 
 
     // clinics with reservation for doctors 
+    /**
+     * Show doctor's reservations
+     */
     public function reservationsForDoctor() {
         $clinics = Clinic::where('doctor_id', Auth::guard('doctor')->id())->where('status', '1')->with('reservations')->orderby('id', 'desc')->get() ;
         return view("default.doctor.doctorReservations", compact(['clinics']) );

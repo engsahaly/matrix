@@ -17,6 +17,9 @@ use App\Notifications\DeclineUserNotification;
 class ReservationController extends Controller
 {
 
+    /**
+     * Create clinic reservation
+     */
     public function reserve(Request $request) {
         $newReservation               = new Reservation();
         $newReservation->clinic_id    = $request->input('id');
@@ -35,11 +38,18 @@ class ReservationController extends Controller
         }
     }
 
+    /**
+     * get all user reservations
+     * @urlParam id integer required Example: 1 
+     */
     public function userReservations() {
         $reservations = Reservation::where('user_id', Auth::user()->id)->with('clinic')->orderby('id', 'desc')->get() ;
         return view("default.user.userReservations", compact(['reservations']) );
     }
 
+    /**
+     * Delete reservation by the the user
+     */
     public function delete(Request $request) {
         $reservation = Reservation::find($request->input('id')) ;            
         $success = $reservation->delete() ;
@@ -51,6 +61,9 @@ class ReservationController extends Controller
         }
     }
 
+    /**
+     * Doctor approve reservation
+     */
     public function approve(Request $request) {
         $reservation = Reservation::find($request->input('id')) ;        
         $reservation->status = '1' ;
@@ -66,6 +79,9 @@ class ReservationController extends Controller
         }
     }
 
+    /**
+     * Doctor decline reservation
+     */
     public function decline(Request $request) {
         $reservation = Reservation::find($request->input('id')) ;
         $reservation->status = '0' ;

@@ -13,10 +13,17 @@ class DoctorLoginController extends Controller
         $this->middleware('guest:doctor', ['except' => ['doctorLogout']]) ;
     }
 
+    /**
+     * Show doctor login form
+     */
     public function showLoginForm() {
         return view("default.doctorAuth.doctorLogin") ;
     }
 
+
+    /**
+     * Doctor login
+     */
     public function login(Request $request) {
         // validate form data 
         $this->validate($request, [
@@ -34,6 +41,10 @@ class DoctorLoginController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'))->with('doctorLoginMSG', 'These credentials do not match our records');
     }
 
+
+    /**
+     * Doctor logout
+     */
     public function doctorLogout() {
         Auth::guard('doctor')->logout();
         return view("default.doctorAuth.doctorLogin") ;
