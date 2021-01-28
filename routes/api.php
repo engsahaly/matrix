@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+##--------------------------------------------------GET ALL DOCTORS API & GET ALL CLINICS API
+Route::get('doctors', 'Api\DoctorController@index')->name('api.doctors.index');
+Route::get('clinics', 'Api\ClinicController@index')->name('api.clinics.index');
