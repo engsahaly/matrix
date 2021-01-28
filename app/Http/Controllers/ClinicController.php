@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Clinic ;
+use \App\Models\Reservation ;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ClinicController extends Controller
@@ -156,5 +158,14 @@ class ClinicController extends Controller
             return response()->json(['admin_clinic_decline_error'=>'There is something wrong .. Please try again later!']);
         }
     }
+
+
+    // clinics with reservation for doctors 
+    public function reservationsForDoctor() {
+        $clinics = Clinic::where('doctor_id', Auth::guard('doctor')->id())->where('status', '1')->with('reservations')->orderby('id', 'desc')->get() ;
+        return view("default.doctor.doctorReservations", compact(['clinics']) );
+    }
+
+
 
 }

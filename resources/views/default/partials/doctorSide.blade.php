@@ -24,7 +24,7 @@
                                 
                 <!-- reservations tab -->
                 <li class="nav-item @yield('s_reservations')">
-                    <a href="#">
+                    <a href="{{ route('doctor.reservations') }}">
                         <i class="fas fa-check-square"></i>
                         <p>Reservations</p>
                     </a>

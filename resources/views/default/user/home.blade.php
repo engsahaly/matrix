@@ -25,10 +25,14 @@
                                 <h6 class="card-subtitle mb-2 text-danger">{{ $clinic->fees }} $</h6>
                                 <p class="card-text">{{ $clinic->description }}</p>                                   
                                 @if (Auth::guard()->check()) 
-                                    @if ( $clinic->reservations->contains('user_id', Auth::user()->id) )                                        
-                                        <span class="badge badge-warning user_cancel_class">Pending Confirmation</span>  
+                                    @if ( $clinic->reservations->contains('user_id', Auth::user()->id) )               
+                                        @if ($clinic->reservations->contains('status', '1') )
+                                        <span class="badge badge-success user_cancel_class">Confirmed</span>
+                                        @else 
+                                        <span class="badge badge-warning user_cancel_class">Pending Confirmation</span>
+                                        @endif
                                     @else 
-                                        <a href="{{ route('user.reserve') }}" data-id="{{ $clinic->id }}" data-user="{{ Auth::user()->id }}" class="btn btn-sm  btn-success user_reserve_class" data-toggle="modal" data-target="#user_reserve_modal">Reserve</a>
+                                        <a href="{{ route('user.reserve') }}" data-id="{{ $clinic->id }}" data-user="{{ Auth::user()->id }}" class="btn btn-sm  btn-primary user_reserve_class" data-toggle="modal" data-target="#user_reserve_modal">Reserve</a>
                                     @endif
                                 @else
                                     <a href="{{ route('user.login') }}" class="btn btn-sm  btn-success">Reserve</a>

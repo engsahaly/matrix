@@ -40,6 +40,29 @@ class ReservationController extends Controller
         }
     }
 
+    public function approve(Request $request) {
+        $reservation = Reservation::find($request->input('id')) ;        
+        $reservation->status = '1' ;
+        $success = $reservation->save() ;
+
+        if ($success) {
+            return response()->json(['doctor_reservation_approve_success'=>'Updated Successfully']);
+        } else {
+            return response()->json(['doctor_reservation_approve_error'=>'There is something wrong .. Please try again later!']);
+        }
+    }
+
+    public function decline(Request $request) {
+        $reservation = Reservation::find($request->input('id')) ;
+        $reservation->status = '0' ;
+        $success = $reservation->save() ;
+
+        if ($success) {
+            return response()->json(['doctor_reservation_decline_success'=>'Updated Successfully']);
+        } else {
+            return response()->json(['doctor_reservation_decline_error'=>'There is something wrong .. Please try again later!']);
+        }
+    }
 
 
 }

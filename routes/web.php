@@ -74,8 +74,13 @@ Route::prefix('doctor')->group(function () {
     Route::post('/clinic/delete', 'ClinicController@delete')->name('doctor.clinic.delete');
     Route::get('/clinic/edit', 'ClinicController@showEditForm')->name('doctor.clinic.showEditForm');
     Route::post('/clinic/edit', 'ClinicController@update')->name('doctor.clinic.update');
-
     
+    
+    ##------------------------------------------------------- RESERVATIONS SECTION
+    Route::get('/reservations', 'ClinicController@reservationsForDoctor')->name('doctor.reservations');
+    Route::post('/reservation/approve', 'ReservationController@approve')->name('doctor.reservation.approve');
+    Route::post('/reservation/decline', 'ReservationController@decline')->name('doctor.reservation.decline');
+
 }) ;
 
 
