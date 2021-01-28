@@ -1,3 +1,8 @@
+<?php
+  use \App\Http\Controllers\ClinicController;
+  $clinics = ClinicController::allClinics();
+?>
+
 @extends('default.master')
 
 @section('seoTitle','Matrix doctors | Home')
@@ -9,15 +14,23 @@
         
         <div class="page-inner mt-2">
             <div class="row">
-                <div class="col-md-12">
-                    <div>
-                        <div>
-                            <div class="card-head-row card-tools-still-right">
-                                <h4 class="card-title text-primary text-center">here i will display doctors and reserve button</h4>
+                @if (count($clinics) > 0)
+                    @foreach ($clinics as $clinic)
+                        <div class="card col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">{{ $clinic->doctor->name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ $clinic->speciality }}</h6>
+                                <h6 class="card-subtitle mb-2 text-danger">{{ $clinic->fees }} $</h6>
+                                <p class="card-text">{{ $clinic->description }}</p>
+                                <a href="#" class="card-link btn btn-sm btn-primary">Reserve</a>                                
                             </div>
                         </div>
+                    @endforeach
+                @else 
+                    <div class="col-12 alert alert-danger text-danger">
+                        No clinics found right now ...
                     </div>
-                </div>
+                @endif                    
             </div>
         </div>
     </div>
