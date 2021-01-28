@@ -58,4 +58,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    ##--------------------------------- RELATIONSHIPS
+    public function reservations() {
+        return $this->hasMany("\App\Models\Reservation", 'user_id', 'id');
+    }
+    
 }

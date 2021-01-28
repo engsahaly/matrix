@@ -24,6 +24,11 @@ Route::prefix('/')->group(function () {
     Route::get('/login', 'UserLoginController@showLoginForm')->name('user.login');
     Route::post('/login', 'UserLoginController@login')->name('user.login.submit');
     Route::get('/logout', 'UserLoginController@userLogout')->name('user.logout');
+    
+    ##------------------------------------------------------- RESERVATION SECTION
+    Route::post('/user/reserve', 'ReservationController@reserve')->name('user.reserve');
+    Route::get('/user/reservations', 'ReservationController@userReservations')->name('user.reservations');
+    Route::post('/user/reservation/delete', 'ReservationController@delete')->name('user.reservation.delete');
 
 }) ;
 

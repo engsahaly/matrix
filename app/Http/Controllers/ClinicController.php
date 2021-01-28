@@ -10,7 +10,7 @@ class ClinicController extends Controller
 {
     // frontend
     public static function allClinics() {
-        $clinics = Clinic::where('status', '1')->orderby('id', 'desc')->with(['doctor'])->get() ;
+        $clinics = Clinic::where('status', '1')->orderby('id', 'desc')->with(['doctor', 'reservations'])->get() ;
         return $clinics ;
     }
     

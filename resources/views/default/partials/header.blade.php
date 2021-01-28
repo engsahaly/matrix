@@ -35,7 +35,7 @@
                             </li>
                                 <div class="dropdown-divider"></div>
                             <li>
-                                <a class="dropdown-item" href="#">My Reservations</a>
+                                <a class="dropdown-item" href="{{ route('user.reservations') }}">My Reservations</a>
                             </li>
                                 <div class="dropdown-divider"></div>
                             <li>
