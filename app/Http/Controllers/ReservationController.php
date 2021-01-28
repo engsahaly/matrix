@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Reservation ;
+use \App\Models\Doctor ;
+use \App\Models\Clinic ;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Notification;
+use App\Notifications\DoctorNotification;
 
 class ReservationController extends Controller
 {
@@ -16,6 +20,10 @@ class ReservationController extends Controller
         $newReservation->user_id      = $request->input('user');
         $newReservation->status       = '0';
         $success                      = $newReservation->save();
+
+        $currentClinic = Clinic::find($request->input('id'));
+        $currentDoctor = Doctor::find($currentClinic->doctor_id);
+        Notification::send($currentDoctor, new DoctorNotification());
 
         if ($success) {
             return response()->json(['user_reserve_success'=>'Reservation request sent Successfully']);
