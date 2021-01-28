@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use \App\Models\Reservation ;
 use \App\Models\Doctor ;
 use \App\Models\Clinic ;
+use \App\Models\User ;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Notification;
 use App\Notifications\DoctorNotification;
+use App\Notifications\ApproveUserNotification;
+use App\Notifications\DeclineUserNotification;
 
 class ReservationController extends Controller
 {
@@ -53,6 +56,9 @@ class ReservationController extends Controller
         $reservation->status = '1' ;
         $success = $reservation->save() ;
 
+        $user = User::find($reservation->user_id) ;
+        Notification::send($user, new ApproveUserNotification());
+
         if ($success) {
             return response()->json(['doctor_reservation_approve_success'=>'Updated Successfully']);
         } else {
@@ -64,6 +70,9 @@ class ReservationController extends Controller
         $reservation = Reservation::find($request->input('id')) ;
         $reservation->status = '0' ;
         $success = $reservation->save() ;
+
+        $user = User::find($reservation->user_id) ;
+        Notification::send($user, new DeclineUserNotification());
 
         if ($success) {
             return response()->json(['doctor_reservation_decline_success'=>'Updated Successfully']);
